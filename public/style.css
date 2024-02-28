@@ -11,7 +11,7 @@ body {
     display: flex;
     flex-direction: column;
 }
-.img, .imgI {
+.img {
     display: flex;
     align-items: center;
     justify-content: center;
