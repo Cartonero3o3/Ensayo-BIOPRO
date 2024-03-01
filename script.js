@@ -22,18 +22,17 @@ for (let j = 0; j < imgIguales.length; j++) {
     //Esta linea de abajo escucha cuando se clikee los cuadraditos derechos 
     imgIguales[j].addEventListener('click', () => {
             //En eseste if se pregunta iultimo cliceado tiene algo guardado, y despues se pregunta si el nuevo clikeado es igual al ultimo clikeado
-        if (ultimoClickeado !== null && imgIguales[j].id === ultimoClickeado.id) {
-            imgIguales[j].style.opacity = 0;
-            imgElements[j].style.opacity = 0;
-            contadorCorrecto++;
-            clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
-            setTimeout(() => {
+            if (ultimoClickeado !== null && imgIguales[j].id === ultimoClickeado.id) {
+                imgIguales[j].style.opacity = 0;
+                imgElements[j].style.opacity = 0;
+                contadorCorrecto++;
+                clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
+                setTimeout(() => {
+                  // Oculta los elementos después de que la animación haya terminado
                 imgIguales[j].style.display = "none";
                 imgElements[j].style.display = "none";
-            }, 500);
-        } else {
-            contadorIncorrecto++;
-            clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
-        }
-    });
-}
+                }, 300);
+            } else {
+                contadorIncorrecto++;
+                clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
+            }})}
