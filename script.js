@@ -1,6 +1,6 @@
 const imgElements = document.getElementsByClassName("img");
 const imgIguales = document.getElementsByClassName("imgD");
-let ultimoClickeado = null
+let ultimoClickeado = 0
 
 for (let i = 0; i < imgElements.length; i++) {
     // El addEventListener escucha constantemente si uno de los elementos de la izquierda fue clickeado
@@ -15,7 +15,7 @@ for (let j = 0; j < imgIguales.length; j++) {
     //Esta linea de abajo escucha cuando se clikee los cuadraditos derechos 
     imgIguales[j].addEventListener('click', () => {
         //En eseste if se pregunta iultimo cliceado tiene algo guardado, y despues se pregunta si el nuevo clikeado es igual al ultimo clikeado
-        if (ultimoClickeado !== null && imgIguales[j].id === ultimoClickeado.id) {
+        if (ultimoClickeado !== 0 && imgIguales[j].id === ultimoClickeado.id) {
             imgIguales[j].style.display = "none";
             imgElements[j].style.display = "none";
         }

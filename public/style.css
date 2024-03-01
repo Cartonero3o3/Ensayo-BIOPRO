@@ -3,14 +3,17 @@ body {
     display: flex;
     justify-content: center;
 }
+
 .container {
     display: flex;
     flex-direction: row;
 }
+
 .column {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;   
 }
+
 .img, .imgD {
     display: flex;
     align-items: center;
