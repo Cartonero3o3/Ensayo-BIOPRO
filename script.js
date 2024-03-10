@@ -1,13 +1,13 @@
-const imgElements = document.getElementsByClassName("Cuadrado");
-const imgIguales = document.getElementsByClassName("CuadradoD");
+const CuadradosIzquierdos = document.getElementsByClassName("Cuadrado");
+const CuadradosDerechos = document.getElementsByClassName("CuadradoD");
 const divsIzquierda = document.querySelectorAll('.Cuadrado');
 const divsDerecha = document.querySelectorAll('.CuadradoD');
 let clickCorrecto = document.getElementsByClassName("contadorIgual")[0];
 let clickIncorrecto = document.getElementsByClassName("contadorIncorrecto")[0];
 let mesclador = document.getElementById("mesclador"); 
-let ultimoClickeado= null;
 let contadorCorrecto = 0;
 let contadorIncorrecto = 0;
+let CheckList = [0, 0]
 
 /*
 http://127.0.0.1:5500/index.html
@@ -97,15 +97,47 @@ function mostrarImagenes() {
 document.addEventListener("DOMContentLoaded", mostrarImagenes);
 mesclador.addEventListener("click", mesclar);
 
-for (let i = 0; i < imgElements.length; i++) {
-    // El addEventListener escucha constantemente si uno de los elementos de la izquierda fue clickeado
-    imgElements[i].addEventListener('click', () => {
-        // Se asigna el valor del elemento clickeado a ultimoClickeado
-        ultimoClickeado = imgElements[i]
+//Este for lo que hace es recorrer todas las img que estan a la derecha que fueron nombradas como "imgIguales"
+// Escucha los clics en los cuadrados izquierdos
+for (let j = 0; j < CuadradosIzquierdos.length; j++) {
+    CuadradosIzquierdos[j].addEventListener('click', () => {
+        CheckList[0] = divsIzquierda[j].getAttribute('value');
+        // Verifica si ambos lados tienen valores asignados y si son iguales
+        if (CheckList[0] != 0 && CheckList[1] != 0 ) {
+            if (CheckList[1] === CheckList[0]) {
+                contadorCorrecto++;
+                clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
+                CheckList = [0, 0]
+            } else {
+                contadorIncorrecto++;
+                clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
+                CheckList = [0, 0]
+            }
+        }
     });
 }
 
-//Este for lo que hace es recorrer todas las img que estan a la derecha que fueron nombradas como "imgIguales"
+// Escucha los clics en los cuadrados derechos
+for (let i = 0; i < CuadradosDerechos.length; i++) {
+    CuadradosDerechos[i].addEventListener('click', () => {
+        CheckList[1] = divsDerecha[i].getAttribute('value');
+        // Verifica si ambos lados tienen valores asignados y si son iguales
+        if (CheckList[0] != 0 && CheckList[1] != 0 ) {
+            if (CheckList[1] === CheckList[0]) {
+                contadorCorrecto++;
+                clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
+                CheckList = [0, 0]
+            } else {
+                contadorIncorrecto++;
+                clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
+                CheckList = [0, 0]
+            }
+        }
+    });
+}
+
+
+/*
 for (let j = 0; j < imgIguales.length; j++) {
     //Esta linea de abajo escucha cuando se clikee los cuadraditos derechos 
     imgIguales[j].addEventListener('click', () => {
@@ -126,3 +158,4 @@ for (let j = 0; j < imgIguales.length; j++) {
             }
     })
 }
+*/
