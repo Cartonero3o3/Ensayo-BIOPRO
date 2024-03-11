@@ -108,7 +108,7 @@ for (let j = 0; j < CuadradosIzquierdos.length; j++) {
                 // Quitamos la clase después de un tiempo para que la animación no se repita
                 setTimeout(() => {
                     document.body.classList.remove('animate__animated', 'animate__shakeX');
-                }, 2000);
+                }, 1000);
                 CheckList = [0, 0]
             }
         }
@@ -118,6 +118,7 @@ for (let j = 0; j < CuadradosIzquierdos.length; j++) {
 for (let i = 0; i < CuadradosDerechos.length; i++) {
     CuadradosDerechos[i].addEventListener('click', () => {
         CheckList[1] = divsDerecha[i].getAttribute('value');
+
         if (CheckList[0] != 0 && CheckList[1] != 0 ) {
             if (CheckList[1] === CheckList[0]) {
                 contadorCorrecto++;
@@ -135,3 +136,4 @@ for (let i = 0; i < CuadradosDerechos.length; i++) {
         }
     });
 }
+

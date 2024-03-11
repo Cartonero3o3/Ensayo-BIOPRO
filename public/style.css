@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(66, 66, 66) !important; 
+    background-color: rgb(145, 215, 228) !important; 
     display: flex;
     justify-content: center;
 }
@@ -10,38 +10,40 @@ body {
 }
 
 .contadorIgual{
+    justify-content: center;
     background-color: rgb(81, 139, 0);
     display: flex;
     align-items: center;
     max-height: 80px;
-    width:100px;
+    width:100%;
     border-radius: 26px;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .contadorIncorrecto{
+    justify-content: center;
     background-color: darkred;
     display: flex;
     align-items: center;
     max-height: 80px;
-    width:100px;
+    width:100%;
     border-radius: 26px;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 
 .column {
     display: flex;
     flex-direction: column;
-    margin: 0 auto; 
     position: relative; 
-    margin: 0; 
 }
-
-
-.Cuadrado, .CuadradoD {
-    display: flex;
+.mesclador{
     align-items: center;
+    justify-items: center;
+    display: flex;
     justify-content: center;
     background-color: black;
-    margin: 0.8vh 11vw 0.8vh 11vw;
     padding: 10px;
     width: 8vw;
     height: 8vw;
@@ -50,34 +52,72 @@ body {
     cursor: pointer;
     border-radius: 8px;
     opacity: 1;
-    transition: opacity 0.5s ease, transform 1.5s ease; /* Agregamos la propiedad transform a la transición */
-
 }
-
-
-
 .Cuadrado, .CuadradoD {
-    animation: desaparecer-y-subir 0.5s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    margin-top: 10%;
+    padding: 10px;
+    width: 8vw;
+    height: 8vw;
+    font-size: 24px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    border-radius: 8px;
+    opacity: 1;
+    transform: transform 0.1s ease, background-color 10s ease, opacity 2s ease;
+}
+
+.Cuadrado:active,
+.CuadradoD:active {
+    opacity: 0;
+    transition: opacity 2s ease; /* Transición de opacidad al hacer clic */
+}
+
+.Cuadrado:active,
+.CuadradoD:active {
+    transform: scale(0.95); /* Reducir tamaño cuando está activo */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro cuando está activo */
+}
+
+.Cuadrado::before, .CuadradoD::before {
+    content: '';
+    position: absolute;
+    width: 10%;
+    height: 10%;
+    background-color: transparent;
+    z-index: -1;
+    transition: background-color 0.03s ease;
+}
+
+.Cuadrado:active::before,
+.CuadradoD:active::before {
+    content: '';
+    position: absolute;
+    width: 110%;
+    height: 110%;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: -1;
 }
 
 
-.animate__shakeX {
-    --animate-duration: 1s;
-    animation-duration: 1s;
-    animation-fill-mode: both;
+@media (max-width: 800px) {
+    .container {
+        padding: 10px;
+    }
+
+    .contadorIgual, .contadorIncorrecto {
+        width: 100%;
+        margin-bottom: 2%;
+        margin: 0%;
+    }
+
+    .mesclador, .Cuadrado, .CuadradoD {
+        width: 80px;
+        height: 80px;
+        font-size: 18px;
+        margin: 0%;
+    }
 }
-
-@keyframes animate__shakeX {
-    0%, 100% {
-        transform: translateX(0);
-    }
-
-    10%, 30%, 50%, 70%, 90% {
-        transform: translateX(-10px);
-    }
-
-    20%, 40%, 60%, 80% {
-        transform: translateX(10px);
-    }
-}
-
