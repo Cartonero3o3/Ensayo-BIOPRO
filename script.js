@@ -99,13 +99,10 @@ for (let j = 0; j < CuadradosIzquierdos.length; j++) {
                 contadorCorrecto++;
                 clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
                 CheckList = [0, 0]
-                
             } else {
                 contadorIncorrecto++;
                 clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
-                // Agregamos la clase animate__shakeX para la animación de sacudida
                 document.body.classList.add('animate__animated', 'animate__shakeX');
-                // Quitamos la clase después de un tiempo para que la animación no se repita
                 setTimeout(() => {
                     document.body.classList.remove('animate__animated', 'animate__shakeX');
                 }, 1000);

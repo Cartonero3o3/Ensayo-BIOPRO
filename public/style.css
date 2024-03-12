@@ -18,7 +18,7 @@ body {
     width:100%;
     border-radius: 26px;
     margin-left: 5%;
-    margin-right: 5%;
+    margin-right: 1%; 
 }
 
 .contadorIncorrecto{
@@ -27,9 +27,9 @@ body {
     display: flex;
     align-items: center;
     max-height: 80px;
-    width:100%;
+    max-width: 80%;
     border-radius: 26px;
-    margin-left: 5%;
+    margin-left: 1%; 
     margin-right: 5%;
 }
 
@@ -38,7 +38,7 @@ body {
     flex-direction: column;
     position: relative; 
 }
-.mesclador{
+.mesclador {
     align-items: center;
     justify-items: center;
     display: flex;
@@ -52,7 +52,14 @@ body {
     cursor: pointer;
     border-radius: 8px;
     opacity: 1;
+    margin-top: 2%; 
 }
+
+.contadorIgual, .contadorIncorrecto, .mesclador {
+    min-width: 100px;
+}
+
+
 .Cuadrado, .CuadradoD {
     display: flex;
     align-items: center;
@@ -68,18 +75,46 @@ body {
     border-radius: 8px;
     opacity: 1;
     transform: transform 0.1s ease, background-color 10s ease, opacity 2s ease;
+    animation: desaparecer-y-subir 0.5s ease-in-out;
+}
+
+@keyframes desaparecer-y-subir {
+    0% {
+    transform: translateY(0);
+    }
+    20%{
+        opacity: 0.8;
+        transform: translateY(-20%);
+    }
+    40%{
+        opacity: 0.6;
+        transform: translateY(-40%);
+    }
+    60%{
+        opacity: 0.4;
+        transform: translateY(-60%);
+    }
+    80%{
+        opacity: 0.2;
+        transform: translateY(-80%);
+    }
+    100% {
+    opacity: 0;
+    transform: translateY(100%);
+    }
 }
 
 .Cuadrado:active,
 .CuadradoD:active {
     opacity: 0;
-    transition: opacity 2s ease; /* Transición de opacidad al hacer clic */
+    transition: opacity 2s ease; 
+    
 }
 
 .Cuadrado:active,
 .CuadradoD:active {
-    transform: scale(0.95); /* Reducir tamaño cuando está activo */
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo oscuro cuando está activo */
+    transform: scale(0.95);
+    background-color: rgba(0, 0, 0, 0.8); 
 }
 
 .Cuadrado::before, .CuadradoD::before {
@@ -94,14 +129,26 @@ body {
 
 .Cuadrado:active::before,
 .CuadradoD:active::before {
-    content: '';
-    position: absolute;
     width: 110%;
     height: 110%;
     background-color: rgba(0, 0, 0, 0.2);
     z-index: -1;
 }
 
+@media (max-width: 500) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .column {
+        margin-top: 20px; /* Ajuste de espacio entre columnas */
+    }
+
+    .Cuadrado, .CuadradoD {
+        margin-top: 10px; /* Espacio entre los cuadrados */
+    }
+}
 
 @media (max-width: 800px) {
     .container {
