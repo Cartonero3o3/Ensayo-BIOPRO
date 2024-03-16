@@ -96,6 +96,9 @@ for (let j = 0; j < CuadradosIzquierdos.length; j++) {
         CheckList[0] = divsIzquierda[j].getAttribute('value');
         if (CheckList[0] != 0 && CheckList[1] != 0 ) {
             if (CheckList[1] === CheckList[0]) {
+                CuadradosIzquierdos[j].style.display = 'none';
+                CuadradosDerechos[j].style.display = 'none';
+                document.querySelector('.column').style.flexWrap = 'wrap';
                 contadorCorrecto++;
                 clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
                 CheckList = [0, 0]
@@ -118,6 +121,8 @@ for (let i = 0; i < CuadradosDerechos.length; i++) {
 
         if (CheckList[0] != 0 && CheckList[1] != 0 ) {
             if (CheckList[1] === CheckList[0]) {
+                CuadradosIzquierdos[i].style.display = 'none';
+                CuadradosDerechos[i].style.display = 'none';
                 contadorCorrecto++;
                 clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
                 CheckList = [0, 0]
