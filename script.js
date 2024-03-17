@@ -116,7 +116,7 @@ for (let i = 0; i < CuadradosDerechos.length; i++) {
             if (CheckList[1] === CheckList[0]) {    
                 contadorCorrecto++;
                 clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
-                eliminarBotonesConValor(CheckList[0]);
+                eliminarBotonesConValor(CheckList[0], CheckList[1]);
                 CheckList = [0, 0]
             } else {
                 contadorIncorrecto++;
@@ -127,9 +127,9 @@ for (let i = 0; i < CuadradosDerechos.length; i++) {
     });
 };
 
-function eliminarBotonesConValor(valor) {
-    const botonesAEliminarIzquierda = document.querySelectorAll(`.Cuadrado[value="${valor}"]`);
-    const botonesAEliminarDerecha = document.querySelectorAll(`.CuadradoD[value="${valor}"]`);
+function eliminarBotonesConValor(valor1, valor2) {
+    const botonesAEliminarIzquierda = document.querySelectorAll(`.Cuadrado[value="${valor1}"]`);
+    const botonesAEliminarDerecha = document.querySelectorAll(`.CuadradoD[value="${valor2}"]`);
     
     botonesAEliminarIzquierda.forEach(boton => {
         boton.remove();
