@@ -96,46 +96,46 @@ for (let j = 0; j < CuadradosIzquierdos.length; j++) {
         CheckList[0] = divsIzquierda[j].getAttribute('value');
         if (CheckList[0] != 0 && CheckList[1] != 0 ) {
             if (CheckList[1] === CheckList[0]) {
-                CuadradosIzquierdos[j].style.display = 'none';
-                CuadradosDerechos[j].style.display = 'none';
-                document.querySelector('.column').style.flexWrap = 'wrap';
                 contadorCorrecto++;
                 clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
+                eliminarBotonesConValor(CheckList[0]); 
                 CheckList = [0, 0]
             } else {
                 contadorIncorrecto++;
                 clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
-                document.body.classList.add('animate__animated', 'animate__shakeX');
-                setTimeout(() => {
-                    document.body.classList.remove('animate__animated', 'animate__shakeX');
-                }, 1000);
                 CheckList = [0, 0]
             }
         }
     });
-}
+};
 
 for (let i = 0; i < CuadradosDerechos.length; i++) {
     CuadradosDerechos[i].addEventListener('click', () => {
         CheckList[1] = divsDerecha[i].getAttribute('value');
-
         if (CheckList[0] != 0 && CheckList[1] != 0 ) {
-            if (CheckList[1] === CheckList[0]) {
-                CuadradosIzquierdos[i].style.display = 'none';
-                CuadradosDerechos[i].style.display = 'none';
+            if (CheckList[1] === CheckList[0]) {    
                 contadorCorrecto++;
                 clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
+                eliminarBotonesConValor(CheckList[0]);
                 CheckList = [0, 0]
             } else {
                 contadorIncorrecto++;
                 clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
-                document.body.classList.add('animate__animated', 'animate__shakeX');
-                setTimeout(() => {
-                    document.body.classList.remove('animate__animated', 'animate__shakeX');
-                }, 1000);
                 CheckList = [0, 0]
             }
         }
     });
-}
+};
 
+function eliminarBotonesConValor(valor) {
+    const botonesAEliminarIzquierda = document.querySelectorAll(`.Cuadrado[value="${valor}"]`);
+    const botonesAEliminarDerecha = document.querySelectorAll(`.CuadradoD[value="${valor}"]`);
+    
+    botonesAEliminarIzquierda.forEach(boton => {
+        boton.remove();
+    });
+
+    botonesAEliminarDerecha.forEach(boton => {
+        boton.remove();
+    });
+}
