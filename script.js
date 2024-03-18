@@ -5,11 +5,11 @@ const divsDerecha = document.querySelectorAll('.CuadradoD');
 let clickCorrecto = document.getElementsByClassName("contadorIgual")[0];
 let clickIncorrecto = document.getElementsByClassName("contadorIncorrecto")[0];
 let mesclador = document.getElementById("mesclador"); 
-let contadorCorrecto = 0;
+let Aciertos = 0;
 let contadorIncorrecto = 0;
 let CheckList = [0, 0]
 
-const listaIzquierda = {
+const lista = {
     lista1: [
         {
             url: "public/img/celular.jpeg",
@@ -53,36 +53,36 @@ const mesclacion = (arr) => {
 }
 
 function mesclar() {
-    mesclacion(listaIzquierda.lista1);
-    mesclacion(listaIzquierda.lista2);
+    mesclacion(lista.lista1);
+    mesclacion(lista.lista2);
 
     divsIzquierda.forEach(function(botonI, i) {
-        let materialI = listaIzquierda.lista1[i];
+        let materialI = lista.lista1[i];
         botonI.style.backgroundImage = `url(${materialI.url})`;
         botonI.setAttribute('value', materialI.value);
     });
 
     divsDerecha.forEach(function(botonI, i) {
-        let materialI = listaIzquierda.lista2[i];
+        let materialI = lista.lista2[i];
         botonI.style.backgroundImage = `url(${materialI.url})`;
         botonI.setAttribute('value', materialI.value);
     });
 }
 
 function mostrarImagenes() {
-    mesclacion(listaIzquierda.lista1);
-    mesclacion(listaIzquierda.lista1);
-    mesclacion(listaIzquierda.lista1);
+    mesclacion(lista.lista1);
+    mesclacion(lista.lista1);
+    mesclacion(lista.lista1);
     divsIzquierda.forEach(function(botonI, i) {
-        let materialI = listaIzquierda.lista1[i];
+        let materialI = lista.lista1[i];
         botonI.style.backgroundImage = `url(${materialI.url})`;
         botonI.setAttribute('value', materialI.value);
     });
-    mesclacion(listaIzquierda.lista2);
-    mesclacion(listaIzquierda.lista2);
-    mesclacion(listaIzquierda.lista2);
+    mesclacion(lista.lista2);
+    mesclacion(lista.lista2);
+    mesclacion(lista.lista2);
     divsDerecha.forEach(function(botonI, i) {
-        let materialI = listaIzquierda.lista2[i];
+        let materialI = lista.lista2[i];
         botonI.style.backgroundImage = `url(${materialI.url})`;
         botonI.setAttribute('value', materialI.value);
     });
@@ -96,19 +96,18 @@ for (let j = 0; j < CuadradosIzquierdos.length; j++) {
         CheckList[0] = divsIzquierda[j].getAttribute('value');
         if (CheckList[0] != 0 && CheckList[1] != 0 ) {
             if (CheckList[1] === CheckList[0]) {
-                CuadradosIzquierdos[j].style.display = 'none';
-                CuadradosDerechos[j].style.display = 'none';
-                document.querySelector('.column').style.flexWrap = 'wrap';
-                contadorCorrecto++;
-                clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
+                Aciertos++;
+                clickCorrecto.innerText = `Clics Iguales: ${Aciertos}`;
                 eliminarBotonesConValor(CheckList[0]); 
                 CheckList = [0, 0]
             } else {
                 contadorIncorrecto++;
                 clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
-                document.body.classList.add('animate__animated', 'animate__shakeX');
+                divsIzquierda[j].classList.add('animate__animated', 'animate__shakeX');    
+                divsDerecha[j].classList.add('animate__animated', 'animate__shakeX');    
                 setTimeout(() => {
-                    document.body.classList.remove('animate__animated', 'animate__shakeX');
+                    divsIzquierda[j].classList.remove('animate__animated', 'animate__shakeX');
+                    divsDerecha[j].classList.remove('animate__animated', 'animate__shakeX');    
                 }, 1000);
                 CheckList = [0, 0]
             }
@@ -123,18 +122,23 @@ for (let i = 0; i < CuadradosDerechos.length; i++) {
 
         if (CheckList[0] != 0 && CheckList[1] != 0 ) {
             if (CheckList[1] === CheckList[0]) {
-                CuadradosIzquierdos[i].style.display = 'none';
-                CuadradosDerechos[i].style.display = 'none';
-                contadorCorrecto++;
-                clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
-                eliminarBotonesConValor(CheckList[0]); 
-                CheckList = [0, 0]
+                if (window.innerWidth > 520){
+                    Aciertos++;
+                    clickCorrecto.innerText = `Aciertos: ${Aciertos}`;
+                    eliminarBotonesConValor(CheckList[0]); 
+                    lista.lista1.splice(i, 1);
+                    mesclador.style.display = "none"
+                    reiniciar.style.display = "flex"
+                    CheckList = [0, 0]
+                }
             } else {
                 contadorIncorrecto++;
-                clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
-                document.body.classList.add('animate__animated', 'animate__shakeX');
+                clickIncorrecto.innerText = `Errores: ${contadorIncorrecto}`;
+                divsIzquierda[i].classList.add('animate__animated', 'animate__shakeX');    
+                divsDerecha[i].classList.add('animate__animated', 'animate__shakeX');    
                 setTimeout(() => {
-                    document.body.classList.remove('animate__animated', 'animate__shakeX');
+                    divsIzquierda[i].classList.remove('animate__animated', 'animate__shakeX');
+                    divsDerecha[i].classList.remove('animate__animated', 'animate__shakeX');    
                 }, 1000);
                 CheckList = [0, 0]
             }
@@ -155,30 +159,33 @@ function eliminarBotonesConValor(valor) {
     });
 }
 
-
 function createAgrupamiento() {
-    var agrupamiento = document.getElementById('agrupamiento');
-
-    if (window.innerWidth <= 520) {
-        if (!agrupamiento) {
+    let agrupamiento = document.getElementById('agrupamiento');
+    let contenedor = document.querySelector('.container');
+    if (!agrupamiento) {
+        if (window.innerWidth <= 520) {
             agrupamiento = document.createElement('div');
             agrupamiento.id = 'agrupamiento';
             agrupamiento.classList.add('column');
             document.querySelector('.container').insertBefore(agrupamiento, document.querySelector('.container').childNodes[4]);
-            agrupamiento.innerHTML = `
-                <div class="contadorIgual">Aciertos: 0</div>
-                <button class="mesclador" id="mesclador">Mezclar</button>
-                <div class="contadorIncorrecto">Errores: 0</div>
-            `;
+            agrupamiento.appendChild(clickCorrecto);
+            agrupamiento.appendChild(mesclador);
+            agrupamiento.appendChild(clickIncorrecto);
         }
     } else {
-        if (agrupamiento) {
+        if (window.innerWidth > 520) {
+            let contadorIgual = agrupamiento.querySelector('.contadorIgual');
+            let contadorIncorrecto = agrupamiento.querySelector('.contadorIncorrecto');
+            let mesclador = agrupamiento.querySelector('.mesclador');
+            contenedor.insertBefore(contadorIgual, contenedor.childNodes[4]);
+            contenedor.insertBefore(mesclador, contenedor.childNodes[4]);
+            contenedor.insertBefore(contadorIncorrecto, contenedor.childNodes[4]);
             agrupamiento.remove();
         }
     }
 }
 
-
-// Llamar a la función al cargar la página y al cambiar el tamaño de la ventana
 window.onload = createAgrupamiento;
 window.addEventListener('resize', createAgrupamiento);
+
+document.getElementById('reiniciar').addEventListener('click', () => location.reload());
