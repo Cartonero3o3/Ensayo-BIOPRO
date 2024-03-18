@@ -96,6 +96,9 @@ for (let j = 0; j < CuadradosIzquierdos.length; j++) {
         CheckList[0] = divsIzquierda[j].getAttribute('value');
         if (CheckList[0] != 0 && CheckList[1] != 0 ) {
             if (CheckList[1] === CheckList[0]) {
+                CuadradosIzquierdos[j].style.display = 'none';
+                CuadradosDerechos[j].style.display = 'none';
+                document.querySelector('.column').style.flexWrap = 'wrap';
                 contadorCorrecto++;
                 clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
                 eliminarBotonesConValor(CheckList[0]); 
@@ -103,34 +106,46 @@ for (let j = 0; j < CuadradosIzquierdos.length; j++) {
             } else {
                 contadorIncorrecto++;
                 clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
+                document.body.classList.add('animate__animated', 'animate__shakeX');
+                setTimeout(() => {
+                    document.body.classList.remove('animate__animated', 'animate__shakeX');
+                }, 1000);
                 CheckList = [0, 0]
             }
         }
     });
-};
+}
+
 
 for (let i = 0; i < CuadradosDerechos.length; i++) {
     CuadradosDerechos[i].addEventListener('click', () => {
         CheckList[1] = divsDerecha[i].getAttribute('value');
+
         if (CheckList[0] != 0 && CheckList[1] != 0 ) {
-            if (CheckList[1] === CheckList[0]) {    
+            if (CheckList[1] === CheckList[0]) {
+                CuadradosIzquierdos[i].style.display = 'none';
+                CuadradosDerechos[i].style.display = 'none';
                 contadorCorrecto++;
                 clickCorrecto.innerText = `Clics Iguales: ${contadorCorrecto}`;
-                eliminarBotonesConValor(CheckList[0], CheckList[1]);
+                eliminarBotonesConValor(CheckList[0]); 
                 CheckList = [0, 0]
             } else {
                 contadorIncorrecto++;
                 clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
+                document.body.classList.add('animate__animated', 'animate__shakeX');
+                setTimeout(() => {
+                    document.body.classList.remove('animate__animated', 'animate__shakeX');
+                }, 1000);
                 CheckList = [0, 0]
             }
         }
     });
-};
+}
 
-function eliminarBotonesConValor(valor1, valor2) {
-    const botonesAEliminarIzquierda = document.querySelectorAll(`.Cuadrado[value="${valor1}"]`);
-    const botonesAEliminarDerecha = document.querySelectorAll(`.CuadradoD[value="${valor2}"]`);
-    
+function eliminarBotonesConValor(valor) {
+    const botonesAEliminarIzquierda = document.querySelectorAll(`.Cuadrado[value="${valor}"]`);
+    const botonesAEliminarDerecha = document.querySelectorAll(`.CuadradoD[value="${valor}"]`);
+
     botonesAEliminarIzquierda.forEach(boton => {
         boton.remove();
     });
@@ -139,3 +154,31 @@ function eliminarBotonesConValor(valor1, valor2) {
         boton.remove();
     });
 }
+
+
+function createAgrupamiento() {
+    var agrupamiento = document.getElementById('agrupamiento');
+
+    if (window.innerWidth <= 520) {
+        if (!agrupamiento) {
+            agrupamiento = document.createElement('div');
+            agrupamiento.id = 'agrupamiento';
+            agrupamiento.classList.add('column');
+            document.querySelector('.container').insertBefore(agrupamiento, document.querySelector('.container').childNodes[4]);
+            agrupamiento.innerHTML = `
+                <div class="contadorIgual">Aciertos: 0</div>
+                <button class="mesclador" id="mesclador">Mezclar</button>
+                <div class="contadorIncorrecto">Errores: 0</div>
+            `;
+        }
+    } else {
+        if (agrupamiento) {
+            agrupamiento.remove();
+        }
+    }
+}
+
+
+// Llamar a la función al cargar la página y al cambiar el tamaño de la ventana
+window.onload = createAgrupamiento;
+window.addEventListener('resize', createAgrupamiento);

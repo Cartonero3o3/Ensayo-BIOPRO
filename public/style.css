@@ -9,6 +9,12 @@ body {
     flex-direction: row;
 }
 
+.column {
+    display: flex;
+    flex-direction: column;
+    position: relative; 
+}
+
 .contadorIgual{
     justify-content: center;
     background-color: rgb(81, 139, 0);
@@ -33,11 +39,7 @@ body {
     margin-right: 5%;
 }
 
-.column {
-    display: flex;
-    flex-direction: column;
-    position: relative; 
-}
+
 .mesclador {
     align-items: center;
     justify-items: center;
@@ -45,14 +47,13 @@ body {
     justify-content: center;
     background-color: black;
     padding: 10px;
-    width: 8vw;
-    height: 8vw;
-    font-size: 24px;
+    height: 80px;
+    width:100%;
+    font-size: 18px;
     color: rgb(255, 255, 255);
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: 20px;
     opacity: 1;
-    margin-top: 2%; 
 }
 
 .contadorIgual, .contadorIncorrecto, .mesclador {
@@ -135,36 +136,18 @@ body {
     z-index: -1;
 }
 
-@media (max-width: 500) {
-    .container {
-        flex-direction: column;
-        align-items: center;
+@media (max-width: 700px) {
+    .column,.Cuadrado, .CuadradoD{
+        margin-left: -1%;
+        margin-right: -1%;
     }
-
-    .column {
-        margin-top: 20px; /* Ajuste de espacio entre columnas */
-    }
-
-    .Cuadrado, .CuadradoD {
-        margin-top: 10px; /* Espacio entre los cuadrados */
+    .contadorIgual, .contadorIncorrecto{
+        margin: 1%;
     }
 }
 
-@media (max-width: 800px) {
-    .container {
-        padding: 10px;
-    }
-
-    .contadorIgual, .contadorIncorrecto {
-        width: 100%;
-        margin-bottom: 2%;
-        margin: 0%;
-    }
-
-    .mesclador, .Cuadrado, .CuadradoD {
-        width: 80px;
-        height: 80px;
-        font-size: 18px;
+@media (max-width: 520px) {
+    .container, .column, .contadorIgual, .contadorIncorrecto, .mesclador, .Cuadrado, .CuadradoD {
         margin: 0%;
     }
 }
