@@ -8,6 +8,8 @@ let mesclador = document.getElementById("mesclador");
 let Aciertos = 0;
 let contadorIncorrecto = 0;
 let CheckList = [0, 0]
+let agarrador; 
+let agarradorD;
 
 const lista = {
     lista1: [
@@ -93,21 +95,22 @@ mesclador.addEventListener("click", mesclar);
 
 for (let j = 0; j < CuadradosIzquierdos.length; j++) {
     CuadradosIzquierdos[j].addEventListener('click', () => {
+        agarrador = j; // Almacenamos el índice j en agarradorD
         CheckList[0] = divsIzquierda[j].getAttribute('value');
         if (CheckList[0] != 0 && CheckList[1] != 0 ) {
             if (CheckList[1] === CheckList[0]) {
                 Aciertos++;
-                clickCorrecto.innerText = `Clics Iguales: ${Aciertos}`;
+                clickCorrecto.innerText = `Aciertos: ${Aciertos}`;
                 eliminarBotonesConValor(CheckList[0]); 
                 CheckList = [0, 0]
             } else {
                 contadorIncorrecto++;
-                clickIncorrecto.innerText = `Clics Incorrectos: ${contadorIncorrecto}`;
-                divsIzquierda[j].classList.add('animate__animated', 'animate__shakeX');    
-                divsDerecha[j].classList.add('animate__animated', 'animate__shakeX');    
+                clickIncorrecto.innerText = `Errores: ${contadorIncorrecto}`;
+                divsIzquierda[agarrador].classList.add('animate__animated', 'animate__shakeX');    
+                divsDerecha[agarradorD].classList.add('animate__animated', 'animate__shakeX');    
                 setTimeout(() => {
-                    divsIzquierda[j].classList.remove('animate__animated', 'animate__shakeX');
-                    divsDerecha[j].classList.remove('animate__animated', 'animate__shakeX');    
+                    divsIzquierda[agarrador].classList.remove('animate__animated', 'animate__shakeX');
+                    divsDerecha[agarradorD].classList.remove('animate__animated', 'animate__shakeX');    
                 }, 1000);
                 CheckList = [0, 0]
             }
@@ -115,11 +118,10 @@ for (let j = 0; j < CuadradosIzquierdos.length; j++) {
     });
 }
 
-
 for (let i = 0; i < CuadradosDerechos.length; i++) {
     CuadradosDerechos[i].addEventListener('click', () => {
+        agarradorD = i
         CheckList[1] = divsDerecha[i].getAttribute('value');
-
         if (CheckList[0] != 0 && CheckList[1] != 0 ) {
             if (CheckList[1] === CheckList[0]) {
                 if (window.innerWidth > 520){
@@ -134,11 +136,11 @@ for (let i = 0; i < CuadradosDerechos.length; i++) {
             } else {
                 contadorIncorrecto++;
                 clickIncorrecto.innerText = `Errores: ${contadorIncorrecto}`;
-                divsIzquierda[i].classList.add('animate__animated', 'animate__shakeX');    
-                divsDerecha[i].classList.add('animate__animated', 'animate__shakeX');    
+                divsIzquierda[agarrador].classList.add('animate__animated', 'animate__shakeX');    
+                divsDerecha[agarradorD].classList.add('animate__animated', 'animate__shakeX');    
                 setTimeout(() => {
-                    divsIzquierda[i].classList.remove('animate__animated', 'animate__shakeX');
-                    divsDerecha[i].classList.remove('animate__animated', 'animate__shakeX');    
+                    divsIzquierda[agarrador].classList.remove('animate__animated', 'animate__shakeX');
+                    divsDerecha[agarradorD].classList.remove('animate__animated', 'animate__shakeX');    
                 }, 1000);
                 CheckList = [0, 0]
             }

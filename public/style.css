@@ -66,7 +66,7 @@ body {
     opacity: 1;
 }
 
-.contadorIgual, .contadorIncorrecto, .mesclador {
+.contadorIgual, .contadorIncorrecto, .mesclador, .reiniciar {
     min-width: 20%;
     min-height: 2%;
     max-width: 37%;
@@ -89,34 +89,9 @@ body {
     border-radius: 8px;
     opacity: 1;
     transform: transform 0.1s ease, background-color 10s ease, opacity 2s ease;
-    animation: desaparecer-y-subir 0.5s ease-in-out;
 }
 
-@keyframes desaparecer-y-subir {
-    0% {
-    transform: translateY(0);
-    }
-    20%{
-        opacity: 0.8;
-        transform: translateY(-20%);
-    }
-    40%{
-        opacity: 0.6;
-        transform: translateY(-40%);
-    }
-    60%{
-        opacity: 0.4;
-        transform: translateY(-60%);
-    }
-    80%{
-        opacity: 0.2;
-        transform: translateY(-80%);
-    }
-    100% {
-    opacity: 0;
-    transform: translateY(100%);
-    }
-}
+
 
 .Cuadrado:active,
 .CuadradoD:active {
@@ -300,3 +275,4 @@ body {
         min-width: 18vw;
     }
 }
+
